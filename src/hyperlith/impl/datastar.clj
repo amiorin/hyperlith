@@ -98,7 +98,9 @@
                              ;; from this div.
                              :data-on:online__window on-load-js}]
                       [:noscript "Your browser does not support JavaScript!"]
-                      [:main {:id "morph"}]]]])
+                      [:header {:id "header"}]
+                      [:main {:id "main"}]
+                      [:footer {:id "footer"}]]]])
                h/html->str)]
     (-> {:status  200
          :headers (assoc default-headers "Content-Encoding" "br")
