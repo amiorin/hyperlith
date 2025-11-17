@@ -6,6 +6,7 @@
 
   ;; HTTP
   http-kit/http-kit {:mvn/version "2.9.0-beta1"}
+  ring/ring-core    {:mvn/version "1.15.3"}
 
   ;; COMPRESSION
   com.aayushatharva.brotli4j/brotli4j            {:mvn/version "1.18.0"}

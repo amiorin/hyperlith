@@ -18,7 +18,10 @@
             [hyperlith.impl.session :refer [wrap-session]]
             [hyperlith.impl.trace]
             [hyperlith.impl.util :as u]
-            [org.httpkit.server :as hk])
+            [org.httpkit.server :as hk]
+            [ring.middleware.resource :refer [wrap-resource]]
+            [ring.middleware.content-type :refer [wrap-content-type]]
+            [ring.middleware.not-modified :refer [wrap-not-modified]])
   (:import [java.net ServerSocket]
            (java.util.concurrent Executors)))
 
@@ -122,9 +125,10 @@
           {:port port})))))
 
 (defn start-app
-  [{:keys [port ctx-start ctx-stop csrf-secret
+  [{:keys [port public ctx-start ctx-stop csrf-secret
            max-refresh-ms on-error]
     :or   {port     8080
+           public   "public"
            on-error er/default-on-error}}]  
   (throw-if-port-in-use! 8080)
   (let [<refresh-ch    (a/chan (a/dropping-buffer 1))
@@ -156,7 +160,10 @@
                            wrap-query-params
                            (wrap-session csrf-secret)
                            wrap-parse-json-body
-                           wrap-blocker)
+                           wrap-blocker
+                           (wrap-resource public)
+                           wrap-content-type
+                           wrap-not-modified)
         stop-server    (hk/run-server wrapped-router {:port port})]
     {:wrapped-router wrapped-router
      :ctx            ctx
