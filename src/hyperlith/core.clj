@@ -116,7 +116,7 @@
 
 (defn throw-if-port-in-use! [port]
   (try
-    (with-open [_ (ServerSocket. 8080)])
+    (with-open [_ (ServerSocket. port)])
     (catch Throwable _
       (throw
         (ex-info
@@ -130,7 +130,7 @@
     :or   {port     8080
            public   "public"
            on-error er/default-on-error}}]  
-  (throw-if-port-in-use! 8080)
+  (throw-if-port-in-use! port)
   (let [<refresh-ch    (a/chan (a/dropping-buffer 1))
         _              (reset! refresh-ch_ <refresh-ch)
         ctx            (ctx-start)
