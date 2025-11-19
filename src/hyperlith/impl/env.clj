@@ -1,10 +1,11 @@
 (ns hyperlith.impl.env
-  (:require [clojure.edn :as edn]
-            [clojure.java.io :as io]))
+  (:require
+   [aero.core :refer [read-config]]
+   [clojure.java.io :as io]))
 
 (def env-data
   (when-let  [env-file (io/resource ".env.edn")]
-    (-> env-file slurp edn/read-string)))
+    (read-config env-file)))
 
 (defmacro env
   "Read env from .env.edn. If env is missing fails at compile time."
