@@ -18,14 +18,7 @@
   dev.onionpancakes/chassis {:mvn/version "1.0.365"}
 
   ;; CONFIGURATION
-  aero/aero {:mvn/version "1.1.6"}
-
-  ;; SQLITE
-  andersmurphy/sqlite4clj
-   ;; {:local/root "../sqlite4clj"}
-  {:git/url "https://github.com/andersmurphy/sqlite4clj"
-   :git/sha "2b1110e92c7d430879aceb00bd276ad7ebe40aa2"}
-  com.github.seancorfield/honeysql {:mvn/version "2.7.1325"}}
+  aero/aero {:mvn/version "1.1.6"}}
  :aliases
  {:dev
   {:extra-paths ["dev"]
