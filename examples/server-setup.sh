@@ -25,7 +25,7 @@ User=app
 Restart=on-failure
 RestartSec=5s
 WorkingDirectory=/home/app
-ExecStart=/usr/bin/java -Dclojure.server.repl="{:port 5555 :accept clojure.core.server/repl}" -jar app.jar -m app.main -Duser.timezone=UTC -XX:+UseZGC -Djdk.attach.allowAttachSelf
+ExecStart=/usr/bin/java -Dclojure.server.repl="{:port 5555 :accept clojure.core.server/repl}" -Duser.timezone=UTC -XX:+UseZGC -Djdk.attach.allowAttachSelf -jar app.jar -m app.main
 
 [Install]
 WantedBy=multi-user.target
